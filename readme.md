@@ -1,6 +1,6 @@
 # Flask CRUD Application
 
-This is a simple Flask web application that demonstrates CRUD (Create, Read, Update, Delete) operations using SQLite as the database. The application is styled with Bootstrap for a responsive and modern UI..
+This is a simple Flask web application that demonstrates CRUD (Create, Read, Update, Delete) operations using SQLite as the database. The application is styled with Bootstrap for a responsive and modern UI.
 
 ## Table of Contents
 - [Features](#features)
