@@ -14,7 +14,7 @@ jobs:
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v1
         with:
-          issue-number: ${{ (github.event.issue.number) }}
+          issue-number: ${{ github.event.issue.number }}
           body: |
             This is a multi-line test comment
             - With GitHub **Markdown** :sparkles:
@@ -22,19 +22,19 @@ jobs:
 
             [1]: https://github.com/peter-evans/create-or-update-comment
           reactions: '+1'
-  comment-wtith-api:
+
+  comment-with-api:
     runs-on: ubuntu-latest
     steps:
       - name: Create comment with API
         run: |
-          gh api -X POST\
-            https://api.github.com/repo/${ORGANIZATION}/${REPOSITORY}/issues/${ISSUE_NUMBER}/comments \
+          gh api -X POST \
+            https://api.github.com/repos/${{ env.ORGANIZATION }}/${{ env.REPOSITORY }}/issues/${{ env.ISSUE_NUMBER }}/comments \
             -f body='
             comment but from API call not action
             '
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ORGANIZATION: ${{ github.event.organisation.login }}
+          ORGANIZATION: ${{ github.repository_owner }}
           REPOSITORY: ${{ github.event.repository.name }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
-      
