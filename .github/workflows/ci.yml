@@ -25,4 +25,4 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest discover -s tests  # Adjust the directory if your tests are elsewhere
+          python -m unittest discover -s tests  
