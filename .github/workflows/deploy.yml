@@ -24,8 +24,8 @@ jobs:
       - name: Deploy app.py and templates to PythonAnywhere
         run: |
           pip install pythonanywhere
-          scp -o StrictHostKeyChecking=no app.py Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/app.py
-          scp -o StrictHostKeyChecking=no -r templates/ Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/templates/
-          ssh -o StrictHostKeyChecking=no Mrutyunjaya07@ssh.pythonanywhere.com 'python3 /home/Mrutyunjaya07/my_site/app.py && pythonanywhere webapp reload Mrutyunjaya07.pythonanywhere.com'
+          scp -o StrictHostKeyChecking=no app.py Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/mysite/app.py
+          scp -o StrictHostKeyChecking=no -r templates/ Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/mysite/templates/
+          ssh -o StrictHostKeyChecking=no Mrutyunjaya07@ssh.pythonanywhere.com 'python3 /home/Mrutyunjaya07/mysite/app.py && pythonanywhere webapp reload Mrutyunjaya07.pythonanywhere.com'
         env:
           PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
