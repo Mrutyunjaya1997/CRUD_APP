@@ -3,9 +3,10 @@ name: Deploy to PythonAnywhere
 on:
   push:
     branches:
-      - master  # Trigger on push to the 'main' branch
+      - master  # Trigger on push to the 'master' branch
     paths:
-      - demo.py  # Trigger only if demo.py is changed
+      - app.py  # Trigger if app.py is changed
+      - templates/**  # Trigger if any file in the templates folder is changed
 
 jobs:
   deploy:
@@ -20,10 +21,11 @@ jobs:
         with:
           python-version: 3.12.3
 
-      - name: Deploy demo.py to PythonAnywhere
+      - name: Deploy app.py and templates to PythonAnywhere
         run: |
           pip install pythonanywhere
-          scp -o StrictHostKeyChecking=no demo.py Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/demo.py
-          ssh -o StrictHostKeyChecking=no Mrutyunjaya07@ssh.pythonanywhere.com 'python3 /home/Mrutyunjaya07/my_site/demo.py && pythonanywhere webapp reload Mrutyunjaya07.pythonanywhere.com'
+          scp -o StrictHostKeyChecking=no app.py Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/app.py
+          scp -o StrictHostKeyChecking=no -r templates/ Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/templates/
+          ssh -o StrictHostKeyChecking=no Mrutyunjaya07@ssh.pythonanywhere.com 'python3 /home/Mrutyunjaya07/my_site/app.py && pythonanywhere webapp reload Mrutyunjaya07.pythonanywhere.com'
         env:
           PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
