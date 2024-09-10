@@ -1,0 +1,26 @@
+name: Deploy to PythonAnywhere
+
+on:
+  push:
+    branches:
+      - master  # This triggers the action on push to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12.3
+
+      - name: Deploy to PythonAnywhere
+        run: |
+          pip install pythonanywhere
+          pa_authtoken="$PA_API_TOKEN" pythonanywhere --api_token $PA_API_TOKEN webapp update Mrutyunjaya07.pythonanywhere.com --source tarball=https://github.com/Mrutyunjaya1997/CRUD_APP/archive/master.tar.gz
+        env:
+          PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
