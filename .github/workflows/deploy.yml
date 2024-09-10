@@ -3,7 +3,9 @@ name: Deploy to PythonAnywhere
 on:
   push:
     branches:
-      - master  # This triggers the action on push to the 'main' branch
+      - master  # Trigger on push to the 'main' branch
+    paths:
+      - demo.py  # Trigger only if demo.py is changed
 
 jobs:
   deploy:
@@ -18,9 +20,10 @@ jobs:
         with:
           python-version: 3.12.3
 
-      - name: Deploy to PythonAnywhere
+      - name: Deploy demo.py to PythonAnywhere
         run: |
           pip install pythonanywhere
-          pa_authtoken="$PA_API_TOKEN" pythonanywhere --api_token $PA_API_TOKEN webapp update Mrutyunjaya07.pythonanywhere.com --source tarball=https://github.com/Mrutyunjaya1997/CRUD_APP/archive/master.tar.gz
+          scp -o StrictHostKeyChecking=no demo.py Mrutyunjaya07@ssh.pythonanywhere.com:/home/Mrutyunjaya07/my_site/demo.py
+          ssh -o StrictHostKeyChecking=no Mrutyunjaya07@ssh.pythonanywhere.com 'python3 /home/Mrutyunjaya07/my_site/demo.py && pythonanywhere webapp reload Mrutyunjaya07.pythonanywhere.com'
         env:
           PA_API_TOKEN: ${{ secrets.PA_API_TOKEN }}
