@@ -11,7 +11,7 @@ jobs:
         uses: umuttopalak/pythonanywhere-deploy-action@v1.0.0
         with:
           host: 'www.pythonanywhere.com' or 'www.eu.pythonanywhere.com'
-          username: {{ Mrutyunjaya07 }}
-          api_token: {{ c5842bc9757aa3e0479b92fe79918b9dd73ee2cc }}
-          domain_name: {{ pythonanywhere.com }}
-          directory: {{ CRUD_APP }}
+          username: 'Mrutyunjaya07'
+          api_token: 'c5842bc9757aa3e0479b92fe79918b9dd73ee2cc'
+          domain_name: 'pythonanywhere.com'
+          directory: 'CRUD_APP'
